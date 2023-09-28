@@ -8,7 +8,7 @@ const ItemCollection = (props) => {
         {
             products.map( (product) => {
                 return (
-                    <EachProductCard key={product.id} {...product}></EachProductCard>
+                    <EachProductCard key={product.id} product={product}></EachProductCard>
                 )
             })
         }

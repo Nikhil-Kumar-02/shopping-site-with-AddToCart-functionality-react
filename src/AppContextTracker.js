@@ -5,12 +5,17 @@ export const AppContext = createContext();
 
 function AppContextTracker({children}){
 
-    const [currCartItems , setcurrCartItems] = useState(0);
-
+    const [currCartItemsNumber , setcurrCartItemsNumber] = useState(0);
+    const [cartItems , addItemsToCart] = useState([]);
+    const [currCartCost , setcurrCartCost] = useState(0);
 
     const value = {
-        currCartItems,
-        setcurrCartItems
+        currCartItemsNumber,
+        setcurrCartItemsNumber,
+        cartItems,
+        addItemsToCart,
+        setcurrCartCost,
+        currCartCost
     }
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>

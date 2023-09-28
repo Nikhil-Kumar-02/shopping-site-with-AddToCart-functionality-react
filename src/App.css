@@ -90,3 +90,14 @@
     }
     
 }
+
+.cartItemContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.cartEachProduct{
+    margin: 1rem;
+    display: flex;
+    width: 30rem;
+}
