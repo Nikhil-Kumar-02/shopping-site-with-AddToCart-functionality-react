@@ -10,7 +10,13 @@ const EachProductCard = ({description , image , price , title}) => {
         </div>
         <div className="priceAndButton">
             <span>${price}</span>
-            <button>Add To Cart</button>
+            <button onClick={(e)=>{
+              console.log(e.target.innerHTML);
+              if(e.target.innerHTML === "Add To Cart")
+                e.target.innerHTML = "Remove";
+              else 
+                e.target.innerHTML = "Add To Cart";
+            }}>Add To Cart</button>
         </div>
     </div>
   )
