@@ -1,9 +1,12 @@
 import './App.css';
+import ItemCollection from './ItemCollection';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <div className="App">
-      hi
+      <Navbar></Navbar>
+      <ItemCollection></ItemCollection>
     </div>
   );
 }
