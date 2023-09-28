@@ -17,10 +17,22 @@
     align-items: center;
 }
 
-.header-left > * {
+.header-left , .notification-container{
+    display: flex;
     margin: 0 1rem;
     font-size: 1.5rem;
-    cursor: pointer;
+}
+
+.notification-container{
+    position: relative;
+    & span{
+        font-size: 1rem;
+        position: absolute;
+        left: 1.5rem;
+        bottom: 1.1rem;
+        background-color: red;
+        border-radius: 4rem;
+    }
     &:hover{
         color: white;
     }

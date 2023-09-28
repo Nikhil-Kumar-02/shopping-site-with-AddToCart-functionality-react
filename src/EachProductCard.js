@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
+import { AppContext } from "./AppContextTracker";
 
 const EachProductCard = ({description , image , price , title}) => {
+  const {setcurrCartItems} = useContext(AppContext);
   return (
     <div className="eachCardItem">
         <div className="cardDescription">
@@ -11,11 +13,14 @@ const EachProductCard = ({description , image , price , title}) => {
         <div className="priceAndButton">
             <span>${price}</span>
             <button onClick={(e)=>{
-              console.log(e.target.innerHTML);
-              if(e.target.innerHTML === "Add To Cart")
+              if(e.target.innerHTML === "Add To Cart"){
+                setcurrCartItems((prev)=>prev+1);
                 e.target.innerHTML = "Remove";
-              else 
+              }
+              else{
+                setcurrCartItems((prev)=>prev-1);
                 e.target.innerHTML = "Add To Cart";
+              }
             }}>Add To Cart</button>
         </div>
     </div>
