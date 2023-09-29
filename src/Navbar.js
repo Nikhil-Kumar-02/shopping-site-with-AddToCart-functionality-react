@@ -4,7 +4,7 @@ import { AppContext } from "./AppContextTracker";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const {currCartItems} = useContext(AppContext);
+  const {cartItemsCnt} = useContext(AppContext);
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ const Navbar = () => {
               navigate('/');
             }}>Home</span>
             <div className="notification-container">
-              <span>{currCartItems}</span>
+              <span>{cartItemsCnt}</span>
               <AiOutlineShoppingCart onClick={()=>{
                 navigate('/gotocart');
               }}></AiOutlineShoppingCart>

@@ -82,9 +82,13 @@
     justify-content: space-between;
     & button{
         border-radius: 1rem;
-        width: 6rem;
+        width: 6.5rem;
+        font-size: 1rem;
+        padding: 0.1rem;
+        font-weight: 600;
         &:hover{
             background-color: wheat;
+            color: red;
             cursor: pointer;
         }
     }
