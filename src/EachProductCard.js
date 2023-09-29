@@ -4,7 +4,8 @@ import { AppContext } from "./AppContextTracker";
 const EachProductCard = (props) => {
   const product = props.product;
   const productId = product.id;
-  const {setcurrCartItemsNumber , addItemsToCart , setcurrCartCost} = useContext(AppContext);
+  const {cartItems , setcartItemsCnt , setItemsToCart , setcurrCartCost} = useContext(AppContext);
+  
   return (
     <div className="eachCardItem">
         <div className="cardDescription">
@@ -14,29 +15,33 @@ const EachProductCard = (props) => {
         </div>
         <div className="priceAndButton">
             <span>${product.price}</span>
-            <button onClick={(e)=>{
-              if(e.target.innerHTML === "Add To Cart"){
-                setcurrCartItemsNumber((prev)=>prev+1);
-                e.target.innerHTML = "Remove";
-                setcurrCartCost((prev)=> prev+product.price);
-                addItemsToCart((prev)=>{
-                    console.log(prev);
-                    console.log(product);
-                  return [...prev,product];
-                })
+            <div>
+              {
+                cartItems[productId] > 0 ? (
+                  <button onClick={()=>{
+                    //reduce the count of items in the cart
+                    setcartItemsCnt((prev)=> prev-1)
+                    //now this item ocurance has decreased
+                    let updatedcartItems = [...cartItems];
+                    updatedcartItems[productId]--;
+                    setItemsToCart(updatedcartItems);
+                    //also add its cost for the cart cost
+                    setcurrCartCost((prev)=> prev - product.price)
+                  }}>Remove</button>
+                ) : (
+                  <button onClick={()=>{
+                    //increase the count of items in the cart
+                    setcartItemsCnt((prev)=> prev+1)
+                    //now this item ocurance has increased
+                    let updatedcartItems = [...cartItems];
+                    updatedcartItems[productId]++;
+                    setItemsToCart(updatedcartItems);
+                    //also add its cost for the cart cost
+                    setcurrCartCost((prev)=> prev + product.price)
+                  }}>Add To Cart</button>
+                )
               }
-              else{
-                setcurrCartItemsNumber((prev)=>prev-1);
-                e.target.innerHTML = "Add To Cart";
-                setcurrCartCost((prev)=> prev-product.price);
-                addItemsToCart((prev)=>{
-                  let newdata = prev.filter((data)=>{
-                    return data.id !== productId;
-                  })
-                  return newdata;
-                })
-              }
-            }}>Add To Cart</button>
+            </div>
         </div>
     </div>
   )

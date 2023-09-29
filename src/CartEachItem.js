@@ -1,12 +1,13 @@
 import React, { useContext } from "react"
-import { AiFillDelete } from 'react-icons/ai';
+import { IoIosAddCircle } from 'react-icons/io';
+import { TiDelete } from 'react-icons/ti';
 import { AppContext } from "./AppContextTracker";
 
 const CartEachItem = (props) => {
     const product = props.item;
-    const productId = product.id;
-    const {setcurrCartItemsNumber , addItemsToCart , setcurrCartCost} = useContext(AppContext);
+    const {setcartItemsCnt , setItemsToCart, cartItems , setcurrCartCost} = useContext(AppContext);
 
+    const totalCost = product.price * cartItems[product.id];
   return (
     <div className="cartEachProduct">
         <div>
@@ -15,18 +16,26 @@ const CartEachItem = (props) => {
         <div>
             <h3>{product.title}</h3>
             <p>{product.description}</p>
+            <p>Price : {product.price}</p>
+            <p>Count : {cartItems[product.id]}</p>
+            <p>Cost : {totalCost}</p>
+            <div className="cartpriceand-add">
+                <IoIosAddCircle onClick={()=>{
+                    setcartItemsCnt((prev)=> prev+1);
+                    setcurrCartCost((prev)=>prev+product.price);
+                    let updatedItemCart = [...cartItems];
+                    updatedItemCart[product.id]++;
+                    setItemsToCart(updatedItemCart);
+                }}></IoIosAddCircle>
+            </div>
             <div className="cartpriceand-delete">
-                <spam>${product.price}</spam>
-                <AiFillDelete onClick={()=>{
-                    setcurrCartItemsNumber((prev)=> prev-1);
+                <TiDelete onClick={()=>{
+                    setcartItemsCnt((prev)=> prev-1);
                     setcurrCartCost((prev)=>prev-product.price);
-                    addItemsToCart((prev)=>{
-                        let newData = prev.filter((pro)=>{
-                            return (pro.id != productId)
-                        })
-                        return newData;
-                    })
-                }}></AiFillDelete>
+                    let updatedItemCart = [...cartItems];
+                    updatedItemCart[product.id]--;
+                    setItemsToCart(updatedItemCart);
+                }}></TiDelete>
             </div>
         </div>
     </div>

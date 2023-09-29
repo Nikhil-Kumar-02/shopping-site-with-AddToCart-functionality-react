@@ -5,15 +5,19 @@ export const AppContext = createContext();
 
 function AppContextTracker({children}){
 
-    const [currCartItemsNumber , setcurrCartItemsNumber] = useState(0);
-    const [cartItems , addItemsToCart] = useState([]);
+    let itemAddedToCart = [];
+    for(let i=0;i<21;i++){
+        itemAddedToCart.push(0);
+    }
+    const [cartItemsCnt , setcartItemsCnt] = useState(0);
+    const [cartItems , setItemsToCart] = useState(itemAddedToCart);
     const [currCartCost , setcurrCartCost] = useState(0);
 
     const value = {
-        currCartItemsNumber,
-        setcurrCartItemsNumber,
+        cartItemsCnt,
+        setcartItemsCnt,
         cartItems,
-        addItemsToCart,
+        setItemsToCart,
         setcurrCartCost,
         currCartCost
     }
